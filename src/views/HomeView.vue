@@ -4,7 +4,7 @@
 			<h1>test</h1>
 		</div>
 		<ul class="navbar-nav">
-			<RouterLink to="/about" class="nav-item">
+			<RouterLink to="/story" class="nav-item">
 				<div class='nav-button'>about</div>
 			</RouterLink>
 			<RouterLink to="/test" class="nav-item">
