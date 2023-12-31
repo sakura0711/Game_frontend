@@ -2,7 +2,6 @@
 <template>
     <div class="container">
 
-        <!-- Button to trigger the modal -->
 
         <div class="d-grid">
             <button @click="openModal" class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus"></i> 新增故事</button>
