@@ -5,29 +5,36 @@
 
 
 	<div class="content">
-		<AddStory :showModal="true"></AddStory>
+		<AddStory :getData="getData" :showModal="true" :message='String("新增故事")'></AddStory>
 	</div>
 
 
 	<div class="container">
-		<div v-for="(chapterData, index) in chapters" :key="index">
-			<div class="mb-3 chapter-card position-relative p-4" @click="toggleContent(index)">
+
+		<div v-for="(chapterData, index) in chapters" :key="index" class="d-flex bd-highlight mb-3">
+			<div class="chapter-card position-relative p-3 w-100 bd-highlight" @click="toggleContent(index)">
 				<h4 class="mb-3"><strong>章節. {{ chapterData.Chapter }}</strong></h4>
 				<h6 class="mb-3">{{ chapterData.Title }}</h6>
-				<button @click="delChapter(chapterData)" class="delete-btn"> <i class="fa-solid fa-xmark"></i> </button>
 				<div v-if="chapterData.showContent" class="content-fade-in">
 					<p class="fs-6">{{ " " + chapterData.StoryContent }}</p>
 				</div>
+				<button @click="delChapter(chapterData)" class="delete-btn"> <i class="fa-solid fa-xmark">刪除</i> </button>
+
 			</div>
+			<AddStory :getData="getData" :showModal="true" :message='String("修改故事")' :data="chapterData"
+				class="p-2 flex-shrink-1 bd-highlight" style="flex-basis: 5%; height: 100%;">
+			</AddStory>
 		</div>
+
 		<router-link to="/" class="btn btn-secondary fixed-bottomS">返回首頁</router-link>
 	</div>
 </template>
   
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import AddStory from '@/components/addStory.vue';
+import AddStory from '@/components/storyOperater.vue';
 import axios from 'axios';
+
 
 interface Chapter {
 	ChapterID: number;
@@ -82,11 +89,17 @@ const delChapter = async (item: Chapter) => {
 		getData();
 	}
 };
+
+
 onMounted(getData);	
 </script>
   
 
 <style scoped>
+.flex_test {
+	display: flex;
+}
+
 .header {
 	display: flex;
 	justify-content: center;
@@ -114,7 +127,7 @@ onMounted(getData);
 	height: 50px;
 	border-radius: 10px;
 	position: fixed;
-	bottom: 10px;
+	top: 10px;
 	/* 距離底部的距離，根據需要調整 */
 	right: 10px;
 	/* 距離右側的距離，根據需要調整 */
@@ -168,6 +181,23 @@ onMounted(getData);
 	right: 10px;
 	/* 根據需要調整距離右側的距離 */
 	background-color: #dc3545;
+	/* 刪除按鈕的背景顏色，可以根據需要進行調整 */
+	color: white;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.modify-btn {
+	line-height: 20px;
+	position: absolute;
+	top: 10px;
+	/* 根據需要調整距離上側的距離 */
+	right: 80px;
+	/* 根據需要調整距離右側的距離 */
+	background-color: #009628;
 	/* 刪除按鈕的背景顏色，可以根據需要進行調整 */
 	color: white;
 	border: none;
