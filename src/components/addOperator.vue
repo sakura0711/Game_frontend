@@ -193,7 +193,6 @@ const exit = async () => {
 </script>
 
 <style lang="scss" scoped>
-.container {}
 
 .form-label {
     font-size: 20px;
