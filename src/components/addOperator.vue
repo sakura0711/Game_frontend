@@ -193,9 +193,7 @@ const exit = async () => {
 </script>
 
 <style lang="scss" scoped>
-.container {
-    overflow: hidden;
-}
+.container {}
 
 .form-label {
     font-size: 20px;
@@ -204,6 +202,7 @@ const exit = async () => {
 
 
 .add-container {
+    display: flex;
     z-index: 100;
     position: fixed;
     width: 100%;
@@ -211,14 +210,18 @@ const exit = async () => {
     background-color: rgba(0, 0, 0, 0.5);
     top: 0px;
     left: 0px;
+    justify-content: center;
+    align-items: center;
+
 
     .add {
+        display: flex;
         position: fixed;
+        max-width: 1000px;
+        max-height: 600px;
         width: 80%;
         height: 80%;
-        top: 10%;
-        left: 10%;
-        display: flex;
+
         justify-content: center;
         align-items: center;
 
