@@ -1,74 +1,89 @@
 <template>
 	<div class="home-page">
 		<div class="home-header">
-			<h1></h1>
+			<h1>ㄟ黑 :D</h1>
 		</div>
 
-		<ul class="navbar-nav">
+		<div class="navbar-nav">
 			<RouterLink to="/story" class="nav-item">
-				<div class='nav-button'>Story 故事</div>
+				Story 故事
 			</RouterLink>
+
 			<RouterLink to="/Weapons" class="nav-item">
-				<div class='nav-button'>Weapons 武器</div>
+				Weapons 武器
 			</RouterLink>
-		</ul>
+
+			<div class="nav-container">
+				<RouterLink to="/attackSkill" class="nav-item sm1">
+					攻擊技能
+				</RouterLink>
+				<RouterLink to="/defendSkill" class="nav-item sm1">
+					防禦技能
+				</RouterLink>
+				<RouterLink to="/supportSkill" class="nav-item sm1">
+					輔助技能
+				</RouterLink>
+			</div>
+		</div>
 	</div>
 </template>
-
   
-<script setup lang="ts">
-</script>
-  
-<style lang="scss">
+<style>
 .home-page {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	font-weight: 500;
+}
 
-	.home-header {
-		width: 100%;
-		height: 100px;
-		background: linear-gradient(to bottom, #5197ff, #ffffff00);
-		text-align: center;
-		font-size: 64px;
-		margin-bottom: 50px;
-	}
+.home-header {
+	width: 100%;
+	height: 100px;
+	background-color: #2c3e50;
+	text-align: center;
+	font-size: 32px;
+	margin-bottom: 20px;
+	color: #ecf0f1;
+	padding: 20px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-	.navbar-nav {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: center;
+.navbar-nav {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
 
-		.nav-item {
-			width: 80vw;
-			height: 126px;
-			border: 2px solid black;
-			border-radius: 20px;
-			margin: 0 10px 20px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			text-align: center;
-			text-decoration: none;
-			transition: background-color 0.3s;
+.nav-item {
+	width: 80vw;
+	max-width: 100%;
+	height: 80px;
+	background-color: #3498db;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+	justify-content: center;
+	text-align: center;
+	text-decoration: none;
+	transition: background-color 0.3s, color 0.3s;
+	color: #ecf0f1;
+	font-size: 18px;
+}
 
-			&:hover {
-				background-color: #a1a1a1;
-			}
+.sm1 {
+	max-width: 32%;
+}
 
-			.nav-button {
-				width: 100%;
+.nav-item:hover {
+	background-color: #2980b9;
+}
 
-				font-size: 50px;
-				color: rgb(0, 0, 0);
-
-				&:hover {
-					color: rgb(255, 255, 255);
-				}
-			}
-		}
-	}
+.nav-container {
+	display: flex;
+	justify-content: space-between;
+	width: 80vw;
 }
 </style>
+  
