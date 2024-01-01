@@ -8,6 +8,9 @@
         </div>
     </div>
 
+    <addOperator v-if="addOnClick" :getData="getData" :showModal="true" :message='String("新增防禦技能")' :exit="addOnClick"
+        :onExit="addClick"></addOperator>
+
     <div class="container">
 
         <div class="container">

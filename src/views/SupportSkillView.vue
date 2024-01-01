@@ -4,9 +4,13 @@
     </div>
 
     <div class="d-grid content" v-if="onClick" @click="addClick()">
-        <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">&nbsp;新增防禦技能</i>
+        <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">&nbsp;新增輔助技能</i>
         </div>
     </div>
+    <addOperator v-if="addOnClick" :getData="getData" :showModal="true" :message='String("新增輔助技能")' :exit="addOnClick"
+        :onExit="addClick"></addOperator>
+
+
     <div class="container">
 
         <div class="container">

@@ -7,6 +7,10 @@
         <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">&nbsp;新增攻擊技能</i>
         </div>
     </div>
+
+    <addOperator v-if="addOnClick" :getData="getData" :showModal="true" :message='String("新增攻擊技能")' :exit="addOnClick"
+        :onExit="addClick"></addOperator>
+
     <div class="container">
 
         <div class="container">

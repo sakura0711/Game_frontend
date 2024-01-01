@@ -82,6 +82,102 @@
                 </div>
             </div>
         </div>
+
+
+        <div v-if="message === '新增攻擊技能'" class="add">
+            <div class="form">
+                <div class="container">
+
+                    <form @submit.prevent="submitData()">
+                        <div class="mb-3">
+                            <label for="chapter" class="form-label">技能名稱</label>
+                            <input type="text" class="form-control" id="title" v-model="SkillName" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="chapter" class="form-label">技能傷害</label>
+                            <input type="number" class="form-control" id="chapter" v-model="SkillDamage" required
+                                placeholder="請輸入數字 小於 10 位">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="content" class="form-label">技能描述</label>
+                            <textarea class="form-control" id="content" v-model="SkillDescription" rows="5"
+                                required></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary me-md-2">提交</button>
+                            <button @click="exit" class="btn btn-secondary">退出</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div v-if="message === '新增防禦技能'" class="add">
+            <div class="form">
+                <div class="container">
+
+                    <form @submit.prevent="submitData()">
+                        <div class="mb-3">
+                            <label for="chapter" class="form-label">技能名稱</label>
+                            <input type="text" class="form-control" id="title" v-model="SkillName" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="chapter" class="form-label">護甲能量</label>
+                            <input type="number" class="form-control" id="chapter" v-model="SkillDamage" required
+                                placeholder="請輸入數字 小於 10 位">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="content" class="form-label">技能描述</label>
+                            <textarea class="form-control" id="content" v-model="SkillDescription" rows="5"
+                                required></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary me-md-2">提交</button>
+                            <button @click="exit" class="btn btn-secondary">退出</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div v-if="message === '新增輔助技能'" class="add">
+            <div class="form">
+                <div class="container">
+
+                    <form @submit.prevent="submitData()">
+                        <div class="mb-3">
+                            <label for="chapter" class="form-label">技能名稱</label>
+                            <input type="text" class="form-control" id="title" v-model="SkillName" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="chapter" class="form-label">技能治療量</label>
+                            <input type="number" class="form-control" id="chapter" v-model="SkillDamage" required
+                                placeholder="請輸入數字 小於 10 位">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="content" class="form-label">技能描述</label>
+                            <textarea class="form-control" id="content" v-model="SkillDescription" rows="5"
+                                required></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary me-md-2">提交</button>
+                            <button @click="exit" class="btn btn-secondary">退出</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -138,12 +234,27 @@ let weaponDamage = ref('');
 //#endregion
 
 
+// 技能 變數區域 (因為技能屬性一樣，所以用不特別區分)
+//#region 
+interface Skills {
+    SkillID: number;
+    SkillName: string;
+    SkillDescription: string;
+    SkillDamage: number;
+
+    showContent: boolean;
+}
+let SkillName = ref('');
+let SkillDamage = ref('');
+let SkillDescription = ref('');
+//#endregion
 
 // 通用函數 
 //#region 
 const submitData = async () => {
     let data = {};
     let apiPath = '';
+
     if (message === '新增故事') {
         apiPath = 'http://localhost:3000/addStory';
         data = {
@@ -162,6 +273,34 @@ const submitData = async () => {
         }
         console.log(data);
     }
+    else if (message === '新增攻擊技能') {
+        apiPath = 'http://localhost:3000/addAttackSkill';
+        data = {
+            _skillName: SkillName.value,
+            _skillDescription: SkillDescription.value,
+            _skillDamage: SkillDamage.value,
+        }
+        console.log(data);
+    }
+    else if (message === '新增防禦技能') {
+        apiPath = 'http://localhost:3000/addDefenseSkill';
+        data = {
+            _skillName: SkillName.value,
+            _skillDescription: SkillDescription.value,
+            _skillDamage: SkillDamage.value,
+        }
+        console.log(data);
+    }
+    else if (message === '新增輔助技能') {
+        apiPath = 'http://localhost:3000/addSupportSkill';
+        data = {
+            _skillName: SkillName.value,
+            _skillDescription: SkillDescription.value,
+            _skillDamage: SkillDamage.value,
+        }
+        console.log(data);
+    }
+
     try {
         const result = await axios.post(apiPath, data);
         console.log(result.data);
@@ -193,7 +332,6 @@ const exit = async () => {
 </script>
 
 <style lang="scss" scoped>
-
 .form-label {
     font-size: 20px;
     font-weight: 700;
