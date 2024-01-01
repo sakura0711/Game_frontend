@@ -42,9 +42,6 @@ import addOperator from '@/components/addOperator.vue';
 import putOperator from '@/components/putOperator.vue';
 import axios from 'axios';
 
-let addOnClick = ref(false);
-let onClick = ref(true);
-
 interface Chapter {
 	ChapterID: number;
 	Chapter: number;
@@ -52,20 +49,6 @@ interface Chapter {
 	StoryContent: string;
 	showContent: boolean;
 }
-
-const addClick = () => {
-	addOnClick.value = !addOnClick.value;
-	console.log(addOnClick.value);
-};
-
-let putOnClick = ref(false);
-let putData = ref<Chapter>();
-const putClick = (_putData: Chapter) => {
-	putOnClick.value = !putOnClick.value;
-	putData.value = _putData;
-	console.log(putOnClick.value);
-}
-
 
 const chapters = ref<Chapter[]>([]);
 
@@ -79,18 +62,6 @@ const getData = async () => {
 	}
 	console.log('data', chapters.value);
 };
-
-const toggleContent = (index: number) => {
-	chapters.value = chapters.value.map((chapter, i) => ({
-		...chapter,
-		showContent: i === index ? !chapter.showContent : false
-	}));
-};
-
-const adding = ref(false);
-const addMOD = () => {
-	adding.value = !adding.value;
-}
 
 const delChapter = async (item: Chapter) => {
 	const confirmDelete = window.confirm('是否要刪除章節' + (item.Chapter) + '？');
@@ -113,6 +84,28 @@ const delChapter = async (item: Chapter) => {
 	}
 };
 
+
+const toggleContent = (index: number) => {
+	chapters.value = chapters.value.map((chapter, i) => ({
+		...chapter,
+		showContent: i === index ? !chapter.showContent : false
+	}));
+};
+
+let addOnClick = ref(false);
+let onClick = ref(true);
+const addClick = () => {
+	addOnClick.value = !addOnClick.value;
+	console.log(addOnClick.value);
+};
+
+let putOnClick = ref(false);
+let putData = ref<Chapter>();
+const putClick = (_putData: Chapter) => {
+	putOnClick.value = !putOnClick.value;
+	putData.value = _putData;
+	console.log(putOnClick.value);
+}
 
 onMounted(getData);	
 </script>

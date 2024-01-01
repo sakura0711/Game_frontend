@@ -64,26 +64,6 @@ interface Weapon {
     // 用於顯示是否要展開
     showContent: boolean;
 }
-
-
-let addOnClick = ref(false);
-let onClick = ref(true);
-const addClick = () => {
-    addOnClick.value = !addOnClick.value;
-    console.log(addOnClick.value);
-};
-
-let putOnClick = ref(false);
-let putData = ref<Weapon>();
-const putClick = (_putData: Weapon) => {
-    putOnClick.value = !putOnClick.value;
-    putData.value = _putData;
-    console.log(putOnClick.value);
-}
-
-
-
-
 const weapons = ref<Weapon[]>([]);
 
 const getData = async () => {
@@ -97,12 +77,6 @@ const getData = async () => {
     console.log('data', weapons.value);
 };
 
-const toggleContent = (index: number) => {
-    weapons.value = weapons.value.map((weapons, i) => ({
-        ...weapons,
-        showContent: i === index ? !weapons.showContent : false
-    }));
-};
 
 
 const delWeapon = async (item: Weapon) => {
@@ -125,6 +99,29 @@ const delWeapon = async (item: Weapon) => {
         getData();
     }
 };
+
+const toggleContent = (index: number) => {
+    weapons.value = weapons.value.map((weapons, i) => ({
+        ...weapons,
+        showContent: i === index ? !weapons.showContent : false
+    }));
+};
+
+
+let addOnClick = ref(false);
+let onClick = ref(true);
+const addClick = () => {
+    addOnClick.value = !addOnClick.value;
+    console.log(addOnClick.value);
+};
+
+let putOnClick = ref(false);
+let putData = ref<Weapon>();
+const putClick = (_putData: Weapon) => {
+    putOnClick.value = !putOnClick.value;
+    putData.value = _putData;
+    console.log(putOnClick.value);
+}
 
 
 onMounted(getData);	
