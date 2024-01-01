@@ -8,7 +8,7 @@
         </div>
 
         <div class="d-grid lh-lg" v-if="message == '修改故事'">
-            <button @click="openModal" class="btn btn-secondary mb-4" style="height: 100%;"><i
+            <button @click="openModal" class="btn btn-secondary mb-4 green" style="height: 100%;"><i
                     class="fa-solid fa-pen-to-square"> 修改</i>
             </button>
         </div>
@@ -40,10 +40,10 @@
 
                             <div class="mb-3">
                                 <label for="content" class="form-label">故事內容</label>
-                                <textarea class="form-control" id="content" v-model="content" rows="4" required></textarea>
+                                <textarea class="form-control" id="content" v-model="content" rows="10" required></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">新增</button>
+                            <button type="submit" class="btn btn-primary">送出</button>
                         </form>
                     </div>
                 </div>
@@ -55,21 +55,33 @@
 <script setup lang="ts">
 import axios from 'axios';
 
-import { ref } from 'vue';
+import { ref, onMounted, type PropType } from 'vue';
+
+
+interface Chapter {
+    ChapterID: number;
+    Chapter: number;
+    Title: string;
+    StoryContent: string;
+
+    // 用於顯示是否要展開
+    showContent: boolean;
+}
+
 
 const props = defineProps({
     getData: Function,
     message: String,
-    data: Object || null,
+    data: Object as PropType<Chapter | undefined>,
 })
-
-
 
 let message = props.message;
 
-let chapter = ref(props.data?.chapter || '');
-let title = ref(props.data?.title || '');
-let content = ref(props.data?.content || '');
+
+
+let chapter = ref(props.data?.Chapter || '');
+let title = ref(props.data?.Title || '');
+let content = ref(props.data?.StoryContent || '');
 
 const myModal = ref<HTMLElement | null>(null);
 
@@ -136,11 +148,7 @@ const submitStory = async () => {
             title.value = '';
             content.value = '';
         } catch (error: any) {
-            if (error.response.data.loadType == '') {
-                alert('此章節已被引用，無法刪除');
-            } else {
-                console.error('!!Error deleting data:', error.message);
-            }
+            console.error('!!Error deleting data:', error.message);
         }
     }
 
@@ -160,6 +168,10 @@ console.log(props.data);
 
 .form-label {
     font-weight: bold;
+}
+
+.btn-secondary {
+    background-color: rgb(12, 148, 0);
 }
 </style>
   

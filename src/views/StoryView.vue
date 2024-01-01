@@ -1,11 +1,11 @@
 <template>
 	<div class="header mb-3">
-		OwO
+
 	</div>
 
 
 	<div class="content">
-		<AddStory :getData="getData" :showModal="true" :message='String("新增故事")'></AddStory>
+		<storyOperator :getData="getData" :showModal="true" :message='String("新增故事")'></storyOperator>
 	</div>
 
 
@@ -14,16 +14,16 @@
 		<div v-for="(chapterData, index) in chapters" :key="index" class="d-flex bd-highlight mb-3">
 			<div class="chapter-card position-relative p-3 w-100 bd-highlight" @click="toggleContent(index)">
 				<h4 class="mb-3"><strong>章節. {{ chapterData.Chapter }}</strong></h4>
-				<h6 class="mb-3">{{ chapterData.Title }}</h6>
+				<h6 class="mb-3"> 《 {{ chapterData.Title }} 》</h6>
 				<div v-if="chapterData.showContent" class="content-fade-in">
 					<p class="fs-6">{{ " " + chapterData.StoryContent }}</p>
 				</div>
 				<button @click="delChapter(chapterData)" class="delete-btn"> <i class="fa-solid fa-xmark">刪除</i> </button>
 
 			</div>
-			<AddStory :getData="getData" :showModal="true" :message='String("修改故事")' :data="chapterData"
+			<storyOperator :getData="getData" :showModal="true" :message='String("修改故事")' :data="chapterData"
 				class="p-2 flex-shrink-1 bd-highlight" style="flex-basis: 5%; height: 100%;">
-			</AddStory>
+			</storyOperator>
 		</div>
 
 		<router-link to="/" class="btn btn-secondary fixed-bottomS">返回首頁</router-link>
@@ -32,7 +32,7 @@
   
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import AddStory from '@/components/storyOperater.vue';
+import storyOperator from '@/components/storyOperator.vue';
 import axios from 'axios';
 
 
