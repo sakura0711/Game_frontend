@@ -3,10 +3,13 @@
 
 	</div>
 
-
-	<div class="content">
-		<storyOperator :getData="getData" :showModal="true" :message='String("新增故事")'></storyOperator>
+	<div class="d-grid content" v-if="onClick" @click="addClick()">
+		<div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">新增故事</i>
+		</div>
 	</div>
+
+	<addOperator v-if="addOnClick" :getData="getData" :showModal="true" :message='String("新增故事")' :exit="addOnClick"
+		:onExit="addClick"></addOperator>
 
 
 	<div class="container">
@@ -19,12 +22,15 @@
 					<p class="fs-6">{{ " " + chapterData.StoryContent }}</p>
 				</div>
 				<button @click="delChapter(chapterData)" class="delete-btn"> <i class="fa-solid fa-xmark">刪除</i> </button>
-
+				<button @click="putClick(chapterData)" class="modify-btn"><i class="fa-solid fa-pen-to-square">
+						修改</i></button>
 			</div>
-			<storyOperator :getData="getData" :showModal="true" :message='String("修改故事")' :data="chapterData"
-				class="p-2 flex-shrink-1 bd-highlight" style="flex-basis: 5%; height: 100%;">
-			</storyOperator>
 		</div>
+
+		<putOperator v-if="putOnClick" :getData="getData" :showModal="true" :message='String("修改故事")' :storyData="putData"
+			:exit="putOnClick" :onExit="putClick" class="p-2 flex-shrink-1 bd-highlight"
+			style="flex-basis: 5%; height: 100%;">
+		</putOperator>
 
 		<router-link to="/" class="btn btn-secondary fixed-bottomS">返回首頁</router-link>
 	</div>
@@ -32,9 +38,12 @@
   
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import storyOperator from '@/components/storyOperator.vue';
+import addOperator from '@/components/addOperator.vue';
+import putOperator from '@/components/putOperator.vue';
 import axios from 'axios';
 
+let addOnClick = ref(false);
+let onClick = ref(true);
 
 interface Chapter {
 	ChapterID: number;
@@ -43,6 +52,20 @@ interface Chapter {
 	StoryContent: string;
 	showContent: boolean;
 }
+
+const addClick = () => {
+	addOnClick.value = !addOnClick.value;
+	console.log(addOnClick.value);
+};
+
+let putOnClick = ref(false);
+let putData = ref<Chapter>();
+const putClick = (_putData: Chapter) => {
+	putOnClick.value = !putOnClick.value;
+	putData.value = _putData;
+	console.log(putOnClick.value);
+}
+
 
 const chapters = ref<Chapter[]>([]);
 
@@ -152,6 +175,7 @@ onMounted(getData);
 }
 
 .content-fade-in {
+	word-wrap: break-word;
 	opacity: 0;
 	animation: fadeIn 0.5s ease-in-out forwards;
 }

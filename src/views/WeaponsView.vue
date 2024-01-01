@@ -4,9 +4,13 @@
     </div>
 
 
-    <div class="content">
-        <weaponOperator :getData="getData" :showModal="true" :message='String("新增武器")'></weaponOperator>
+    <div class="d-grid content" v-if="onClick" @click="addClick()">
+        <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">新增武器</i>
+        </div>
     </div>
+
+    <addOperator v-if="addOnClick" :getData="getData" :showModal="true" :message='String("新增武器")' :exit="addOnClick"
+        :onExit="addClick"></addOperator>
 
 
     <div class="container">
@@ -26,11 +30,16 @@
                 </div>
 
                 <button @click="delWeapon(weaponData)" class="delete-btn"> <i class="fa-solid fa-xmark">刪除</i> </button>
-
+                <button @click="putClick(weaponData)" class="modify-btn"><i class="fa-solid fa-pen-to-square">
+                        修改</i></button>
             </div>
-            <weaponOperator :getData="getData" :showModal="true" :message='String("修改武器")' :data="weaponData"
-                class="p-2 flex-shrink-1 bd-highlight" style="flex-basis: 5%; height: 100%;"></weaponOperator>
+
         </div>
+
+        <putOperator v-if="putOnClick" :getData="getData" :showModal="true" :message='String("修改武器")' :weaponData="putData"
+            :exit="putOnClick" :onExit="putClick" class="p-2 flex-shrink-1 bd-highlight"
+            style="flex-basis: 5%; height: 100%;">
+        </putOperator>
 
         <router-link to="/" class="btn btn-secondary fixed-bottomS">返回首頁</router-link>
     </div>
@@ -38,7 +47,10 @@
   
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import weaponOperator from '@/components/weaponOperator.vue';
+
+import addOperator from '@/components/addOperator.vue';
+import putOperator from '@/components/putOperator.vue';
+
 import axios from 'axios';
 
 
@@ -52,6 +64,25 @@ interface Weapon {
     // 用於顯示是否要展開
     showContent: boolean;
 }
+
+
+let addOnClick = ref(false);
+let onClick = ref(true);
+const addClick = () => {
+    addOnClick.value = !addOnClick.value;
+    console.log(addOnClick.value);
+};
+
+let putOnClick = ref(false);
+let putData = ref<Weapon>();
+const putClick = (_putData: Weapon) => {
+    putOnClick.value = !putOnClick.value;
+    putData.value = _putData;
+    console.log(putOnClick.value);
+}
+
+
+
 
 const weapons = ref<Weapon[]>([]);
 
@@ -157,6 +188,7 @@ onMounted(getData);
 }
 
 .content-fade-in {
+    word-wrap: break-word;
     opacity: 0;
     animation: fadeIn 0.5s ease-in-out forwards;
 }
