@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import PlayerView from '@/views/PlayerView.vue'
 import StroyView from '../views/StoryView.vue'
 import WeaponsView from '../views/WeaponsView.vue'
+
 
 import AttackSkillView from '../views/AttackSkillView.vue'
 import DefendSkillView from '../views/DefenseSkillsView.vue'
@@ -20,6 +22,11 @@ const router = createRouter({
       path: '/story',
       name: 'story',
       component: StroyView,
+    },
+    {
+      path: '/player',
+      name: 'player',
+      component: PlayerView,
     },
     {
       path: '/Weapons',
