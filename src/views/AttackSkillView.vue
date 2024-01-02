@@ -26,7 +26,7 @@
 
             <!-- 顯示詳細資訊 -->
             <skillShow v-if="showOnClick" :message="String('攻擊技能')" :SkillData="showData" :exit="showOnClick"
-                :onExit="showClick" :Skill="style">
+                :onExit="showClick">
             </skillShow>
         </div>
 
@@ -41,8 +41,6 @@ import putOperator from '@/components/putOperator.vue';
 import skillShow from '@/components/skillShow.vue';
 import axios from 'axios';
 
-
-const style = ['text-danger', 'asd'];
 interface Skills {
     SkillID: number;
     SkillName: string;
