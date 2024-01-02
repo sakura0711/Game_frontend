@@ -26,7 +26,7 @@
 
             <!-- 顯示詳細資訊 -->
             <skillShow v-if="showOnClick" :message="String('攻擊技能')" :SkillData="showData" :exit="showOnClick"
-                :onExit="showClick">
+                :onExit="showClick" @submit="getData">
             </skillShow>
         </div>
 
@@ -35,19 +35,20 @@
 </template>
   
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import addOperator from '@/components/addOperator.vue';
 import putOperator from '@/components/putOperator.vue';
 import skillShow from '@/components/skillShow.vue';
 import axios from 'axios';
+
+
+
 
 interface Skills {
     SkillID: number;
     SkillName: string;
     SkillDescription: string;
     SkillDamage: number;
-
-    showContent: boolean;
 }
 
 const attackSkills = ref<Skills[]>([]);
@@ -113,7 +114,7 @@ const putClick = (_putData: Skills) => {
 
 
 
-onMounted(getData);	
+nextTick(getData);	
 </script>
   
 

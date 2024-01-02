@@ -26,7 +26,7 @@
 
             <!-- 顯示詳細資訊 -->
             <skillShow v-if="showOnClick" :message="String('輔助技能')" :SkillData="showData" :exit="showOnClick"
-                :onExit="showClick">
+                :onExit="showClick" @submit="getData">
             </skillShow>
         </div>
 
