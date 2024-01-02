@@ -5,6 +5,11 @@
 		</div>
 
 		<div class="navbar-nav">
+
+			<RouterLink to="/player" class="nav-item">
+				Player 玩家
+			</RouterLink>
+
 			<RouterLink to="/story" class="nav-item">
 				Story 故事
 			</RouterLink>

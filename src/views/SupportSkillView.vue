@@ -15,11 +15,12 @@
 
         <div class="container">
             <div class="row row-cols-4">
-                <template v-for="(attackSkill, index) in supportSkills" :key="index">
-                    <div class="col text-center skill-card m-2 flex-fill" @click="showClick(attackSkill)">
+                <template v-for="(supportSkill, index) in supportSkills" :key="index">
+                    <div class="col text-center skill-card m-2 flex-fill" @click="showClick(supportSkill)">
                         <img src="https://i.imgur.com/dWGVJDK.png" alt="" class="img">
-                        <p4 class="skill_name">{{ attackSkill.SkillName }}</p4>
+                        <p4 class="skill_name">{{ supportSkill.SkillName }}</p4>
                     </div>
+                    <button class="delete-btn" @click="delSkill(supportSkill)"></button>
                 </template>
             </div>
 
@@ -58,7 +59,7 @@ const getData = async () => {
     try {
         const res = await axios.get('http://localhost:3000/getSupportSkill');
         console.log('res', res.data);
-        supportSkills.value = res.data.map((attackSkill: any) => ({ ...attackSkill, showContent: false }));
+        supportSkills.value = res.data.map((supportSkill: any) => ({ ...supportSkill, showContent: false }));
     } catch (error) {
         console.error('Error fetching data:', error);
     }
@@ -66,7 +67,7 @@ const getData = async () => {
 };
 
 
-const delChapter = async (item: Skills) => {
+const delSkill = async (item: Skills) => {
     const confirmDelete = window.confirm('是否要刪除: ' + (item.SkillName) + '?');
     if (confirmDelete) {
         const data = {
@@ -165,18 +166,19 @@ onMounted(getData);
     width: 100%;
 }
 
+
 .skill-card {
+    position: relative;
     display: flex;
     align-items: center;
-    min-width: 300px;
-    border: 2px solid #00ba4b;
+    min-width: 200px;
+    border: 2px solid #00b527;
     border-radius: 10px;
     padding: 15px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
     -webkit-user-select: none;
 }
-
 
 .skill-card:hover {
     transform: scale(1.01);
@@ -188,45 +190,35 @@ onMounted(getData);
     margin-left: 10px;
 }
 
-.content-fade-in {
-    word-wrap: break-word;
-    opacity: 0;
-    animation: fadeIn 0.5s ease-in-out forwards;
-}
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-
-
-/* asdad */
-.position-relative {
-    position: relative;
-}
 
 .delete-btn {
-    line-height: 20px;
-    position: absolute;
-    top: 10px;
-    /* 根據需要調整距離上側的距離 */
-    right: 10px;
-    /* 根據需要調整距離右側的距離 */
-    background-color: #dc3545;
-    /* 刪除按鈕的背景顏色，可以根據需要進行調整 */
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    float: left;
+    position: relative;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    color: transparent;
+    border: transparent;
 }
+
+.delete-btn::before {
+    content: "\2716";
+    font-family: "Font Awesome 6 Frees";
+
+    position: absolute;
+    z-index: 50;
+    left: -20px;
+    line-height: 25px;
+    width: 25px;
+    height: 25px;
+    color: #ffffff;
+    background: #00af1d;
+    /* border: 50%; */
+    border-radius: 50%;
+}
+
 
 .modify-btn {
     line-height: 20px;
