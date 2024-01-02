@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="message_board text-break ">
-
+                    {{ PlayerData?.playerComment }}
                 </div>
 
                 <div class="uuid text-end">UUID: {{ PlayerData?.PlayerUUID }}</div>
@@ -91,7 +91,7 @@ interface Player {
     SupportSkill: Skill;
     MainChapter: Chapter;
     playerLevel: number;
-
+    playerComment: string;
     showContent: boolean;
 }
 

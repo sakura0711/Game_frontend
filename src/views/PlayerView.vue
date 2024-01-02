@@ -69,7 +69,8 @@ interface Player {
     SupportSkill: Skill;
     MainChapter: Chapter;
     playerLevel: number;
-
+    playerComment: string;
+    
     showContent: boolean;
 }
 const players = ref<Player[]>([]);
