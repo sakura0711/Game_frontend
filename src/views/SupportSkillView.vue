@@ -3,7 +3,7 @@
 
     </div>
 
-    <div class="d-grid content" v-if="onClick" @click="addClick()">
+    <div class="mx-auto" style="width: 85vw;" v-if="onClick" @click="addClick()">
         <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">&nbsp;新增輔助技能</i>
         </div>
     </div>
@@ -14,20 +14,22 @@
     <div class="container">
 
         <div class="container">
-            <div class="row row-cols-3">
+            <div class="row row-cols-4">
                 <template v-for="(attackSkill, index) in supportSkills" :key="index">
-                    <div class="col text-center skill-card" @click="showClick(attackSkill)">
-                        <img src="https://i.imgur.com/uCDQUZN.jpeg" alt="" class="img">
+                    <div class="col text-center skill-card m-2 flex-fill" @click="showClick(attackSkill)">
+                        <img src="https://i.imgur.com/dWGVJDK.png" alt="" class="img">
                         <p4 class="skill_name">{{ attackSkill.SkillName }}</p4>
                     </div>
                 </template>
             </div>
 
             <!-- 顯示詳細資訊 -->
-            <skillShow v-if="showOnClick" :message="String('防禦技能')" :SkillData="showData" :exit="showOnClick"
+            <skillShow v-if="showOnClick" :message="String('輔助技能')" :SkillData="showData" :exit="showOnClick"
                 :onExit="showClick">
             </skillShow>
         </div>
+
+
 
         <router-link to="/" class="btn btn-secondary fixed-bottomS">返回首頁</router-link>
     </div>
@@ -127,7 +129,7 @@ onMounted(getData);
     justify-content: center;
     align-items: center;
     height: 200px;
-    background: linear-gradient(to bottom, #ffcece, #ffffff00);
+    background: linear-gradient(to bottom, #bbffca, #ffffff00);
     /* 由上到下的漸變色 */
     color: #fff;
     border-radius: 0 0 10px 10px;
@@ -159,17 +161,22 @@ onMounted(getData);
     max-width: 1000px;
 }
 
+.btn-primary {
+    width: 100%;
+}
+
 .skill-card {
     display: flex;
     align-items: center;
-    min-width: 200px;
-    border: 2px solid #e5e5e5;
+    min-width: 300px;
+    border: 2px solid #00ba4b;
     border-radius: 10px;
     padding: 15px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
     -webkit-user-select: none;
 }
+
 
 .skill-card:hover {
     transform: scale(1.01);

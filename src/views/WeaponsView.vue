@@ -4,8 +4,8 @@
     </div>
 
 
-    <div class="d-grid content" v-if="onClick" @click="addClick()">
-        <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">新增武器</i>
+    <div class="mx-auto" style="width: 85vw;" v-if="onClick" @click="addClick()">
+        <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">&nbsp;新增武器</i>
         </div>
     </div>
 
@@ -168,6 +168,10 @@ onMounted(getData);
 
 .btn-add {
     max-width: 1000px;
+}
+
+.btn-primary {
+    width: 100%;
 }
 
 .chapter-card {

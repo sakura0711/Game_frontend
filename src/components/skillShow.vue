@@ -7,14 +7,14 @@
 
                 <div class="skill_info-block">
                     <div class="header mb-3">
-                        <img src="https://i.imgur.com/uCDQUZN.jpeg" alt="" class="img">
+                        <img :src="imagePath" alt="" class="img">
                         <p class="name m-3">{{ skill.SkillName }}</p>
                     </div>
 
-                    <div class="damage text-danger">
-                        <i class="fa-solid fa-bolt"> 技能傷害&nbsp;</i>
-                        <i class="fa-solid fa-bolt"></i>
-                        <p><strong class="text-danger">&nbsp; {{ skill.SkillDamage }} </strong></p>
+                    <div class="damage" :class="textStyle">
+                        <i :class="iconStyle">&nbsp;{{ text }}&nbsp;</i>
+                        <i :class="iconStyle"></i>
+                        <p><strong :class="textStyle">&nbsp; {{ skill.SkillDamage }} </strong></p>
                     </div>
 
                     <div class="description text-success">
@@ -29,6 +29,7 @@
 </template>
 <script setup lang="ts">
 import { defineProps, ref, type PropType } from 'vue';
+import { onMounted } from 'vue'
 
 const props = defineProps({
     message: String,
@@ -38,7 +39,31 @@ const props = defineProps({
     onExit: Function,
 })
 
-
+let textStyle = ref('');
+let iconStyle = ref('');
+let text = ref('');
+let imagePath = ref('');
+const judgeStyle = () => {
+    if (props.message == '攻擊技能') {
+        text.value = '技能傷害';
+        textStyle.value = 'text-danger';
+        iconStyle.value = 'fa-solid fa-bolt';
+        imagePath.value = 'https://i.imgur.com/jBmDoVC.jpeg'
+    }
+    else if (props.message == '防禦技能') {
+        text.value = '護甲能量';
+        textStyle.value = 'text-primary';
+        iconStyle.value = 'fa-solid fa-shield-halved';
+        imagePath.value = 'https://i.imgur.com/uCDQUZN.jpeg'
+    }
+    else if (props.message == '輔助技能') {
+        text.value = '治療量';
+        textStyle.value = 'text-success';
+        iconStyle.value = 'fa-solid fa-hands-holding-circle';
+        imagePath.value = 'https://i.imgur.com/dWGVJDK.png'
+    }
+}
+onMounted(judgeStyle);
 
 const skill: Skill = {
     SkillID: props.SkillData?.SkillID ?? 0,
@@ -64,7 +89,13 @@ const exit = async () => {
 
 </script>
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500&display=swap');
+
 .container2 {
+
+    font-family: Itim, naikaifont, Microsoft JhengHei, sans-serif;
+
     display: flex;
     z-index: 100;
     position: fixed;
@@ -140,16 +171,18 @@ const exit = async () => {
 
     .name {
         display: inline-block;
-        font: 600 20px/15px 'Microsoft YaHei';
+        font: 600 20px/15px Itim, 'Microsoft YaHei';
     }
 
     .description {
         .text-body {
             width: 100%;
-            height: 200px;
-            font: 400 15px/25px 'Microsoft YaHei';
-
+            height: 310px;
+            font: 400 14px/25px Itim, 'Kaisei Decol', serif;
             letter-spacing: 2px;
+            border: pink dashed 2px;
+            border-radius: 10px;
+            padding: 5px 10px;
         }
     }
 

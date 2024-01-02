@@ -3,7 +3,7 @@
 
     </div>
 
-    <div class="d-grid content" v-if="onClick" @click="addClick()">
+    <div class="mx-auto" style="width: 85vw;" v-if="onClick" @click="addClick()">
         <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">&nbsp;新增攻擊技能</i>
         </div>
     </div>
@@ -14,10 +14,10 @@
     <div class="container">
 
         <div class="container">
-            <div class="row row-cols-3">
+            <div class="row row-cols-4">
                 <template v-for="(attackSkill, index) in attackSkills" :key="index">
-                    <div class="col text-center skill-card" @click="showClick(attackSkill)">
-                        <img src="https://i.imgur.com/uCDQUZN.jpeg" alt="" class="img">
+                    <div class="col text-center skill-card m-2 flex-fill" @click="showClick(attackSkill)">
+                        <img src="https://i.imgur.com/jBmDoVC.jpeg" alt="" class="img">
                         <p4 class="skill_name">{{ attackSkill.SkillName }}</p4>
                     </div>
                 </template>
@@ -25,7 +25,7 @@
 
             <!-- 顯示詳細資訊 -->
             <skillShow v-if="showOnClick" :message="String('攻擊技能')" :SkillData="showData" :exit="showOnClick"
-                :onExit="showClick">
+                :onExit="showClick" :Skill="style">
             </skillShow>
         </div>
 
@@ -41,6 +41,7 @@ import skillShow from '@/components/skillShow.vue';
 import axios from 'axios';
 
 
+const style = ['text-danger', 'asd'];
 interface Skills {
     SkillID: number;
     SkillName: string;
@@ -159,11 +160,15 @@ onMounted(getData);
     max-width: 1000px;
 }
 
+.btn-primary {
+    width: 100%;
+}
+
 .skill-card {
     display: flex;
     align-items: center;
     min-width: 200px;
-    border: 2px solid #e5e5e5;
+    border: 2px solid #ff6666;
     border-radius: 10px;
     padding: 15px;
     cursor: pointer;

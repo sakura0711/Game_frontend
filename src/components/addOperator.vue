@@ -355,9 +355,9 @@ const exit = async () => {
         display: flex;
         position: fixed;
         max-width: 1000px;
-        max-height: 600px;
+        // max-height: 600px;
         width: 80%;
-        height: 80%;
+        height: auto;
 
         justify-content: center;
         align-items: center;

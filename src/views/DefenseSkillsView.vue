@@ -3,7 +3,7 @@
 
     </div>
 
-    <div class="d-grid content" v-if="onClick" @click="addClick()">
+    <div class="mx-auto" style="width: 85vw;" v-if="onClick" @click="addClick()">
         <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">&nbsp;新增防禦技能</i>
         </div>
     </div>
@@ -14,9 +14,9 @@
     <div class="container">
 
         <div class="container">
-            <div class="row row-cols-3">
+            <div class="row row-cols-4">
                 <template v-for="(attackSkill, index) in defenseSkills" :key="index">
-                    <div class="col text-center skill-card" @click="showClick(attackSkill)">
+                    <div class="col text-center skill-card m-2 flex-fill" @click="showClick(attackSkill)">
                         <img src="https://i.imgur.com/uCDQUZN.jpeg" alt="" class="img ">
                         <p4 class="skill_name">{{ attackSkill.SkillName }}</p4>
                     </div>
@@ -125,7 +125,7 @@ onMounted(getData);
     justify-content: center;
     align-items: center;
     height: 200px;
-    background: linear-gradient(to bottom, #ffcece, #ffffff00);
+    background: linear-gradient(to bottom, #a29cff, #ffffff00);
     /* 由上到下的漸變色 */
     color: #fff;
     border-radius: 0 0 10px 10px;
@@ -157,11 +157,15 @@ onMounted(getData);
     max-width: 1000px;
 }
 
+.btn-primary {
+    width: 100%;
+}
+
 .skill-card {
     display: flex;
     align-items: center;
     min-width: 200px;
-    border: 2px solid #e5e5e5;
+    border: 2px solid #95b1ff;
     border-radius: 10px;
     padding: 15px;
     cursor: pointer;
