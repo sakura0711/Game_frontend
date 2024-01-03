@@ -4,13 +4,11 @@
     </div>
 
     <div class="mx-auto" style="width: 85vw;" v-if="onClick" @click="addClick()">
-        <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">&nbsp;新增故事</i>
+        <div class="btn btn-primary mb-3"><i class="fa-regular fa-square-plus">&nbsp;創建新腳色</i>
         </div>
     </div>
-    <!-- 
-    <addOperator v-if="addOnClick" :getData="getData" :showModal="true" :message='String("新增故事")' :exit="addOnClick"
-        :onExit="addClick"></addOperator> -->
 
+    <addPlayer v-if="addOnClick" :exit="addOnClick" :onExit="addClick" @submit="getData"></addPlayer>
 
     <div class="container">
 
@@ -22,7 +20,10 @@
                 }}</i></strong>
 
                 <strong class="chapter"> 主線進度 : {{ playerData.MainChapter.chapter }}</strong>
+
             </div>
+            <button class="delete-btn" @click="delPlayer(playerData)"></button>
+
         </div>
 
         <!-- 顯示詳細資訊 -->
@@ -36,6 +37,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import addPlayer from '@/components/addPlayer.vue';
 import addOperator from '@/components/addOperator.vue';
 import putOperator from '@/components/putOperator.vue';
 import playerShow from '@/components/playerShow.vue';
@@ -70,7 +72,7 @@ interface Player {
     MainChapter: Chapter;
     playerLevel: number;
     playerComment: string;
-    
+
     showContent: boolean;
 }
 const players = ref<Player[]>([]);
@@ -87,26 +89,24 @@ const getData = async () => {
     console.log('data', players.value);
 };
 
-// const delChapter = async (item: Chapter) => {
-//     const confirmDelete = window.confirm('是否要刪除章節' + (item.Chapter) + '？');
-//     if (confirmDelete) {
-//         const data = {
-//             _chapterID: item.ChapterID,
-//         };
-//         console.log(data);
-//         try {
-//             const result = await axios.delete('http://localhost:3000/delStory', { data });
-//             console.log(result.data);
-//         } catch (error: any) {
-//             if (error.response.data.loadType == 'ROW_IS_REFERENCED') {
-//                 alert('此章節已被引用，無法刪除');
-//             } else {
-//                 console.error('!!Error deleting data:', error.message);
-//             }
-//         }
-//         getData();
-//     }
-// };
+const delPlayer = async (item: Player) => {
+    const confirmDelete = window.confirm('是否要刪除玩家' + (item.PlayerName) + '？');
+    if (confirmDelete) {
+        const data = {
+            _playerUUID: item.PlayerUUID,
+        };
+        console.log(data);
+        try {
+            const result = await axios.delete('http://localhost:3000/delPlayer', { data });
+            console.log(result.data);
+        } catch (error: any) {
+
+            console.error('!!Error deleting data:', error.message);
+
+        }
+        getData();
+    }
+};
 
 
 let onClick = ref(true);
@@ -223,5 +223,32 @@ img {
 
 i {
     font-style: normal;
+}
+
+.delete-btn {
+    float: left;
+    position: relative;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    color: transparent;
+    border: transparent;
+}
+
+.delete-btn::before {
+    content: "\2716";
+    font-family: "Font Awesome 6 Frees";
+
+    position: absolute;
+    z-index: 50;
+    left: -20px;
+    line-height: 25px;
+    width: 25px;
+    height: 25px;
+    color: #ffffff;
+    background: #ff3939;
+    border: 50%;
+    border-radius: 50%;
 }
 </style>
