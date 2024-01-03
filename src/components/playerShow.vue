@@ -20,25 +20,36 @@
                 </p>
 
                 <div class="equipment mb-4">
-                    <i class="fa-solid fa-gun"><i>&nbsp;{{ PlayerData?.playerWeapon.name }}&nbsp; {{
-                        PlayerData?.playerWeapon.type }}</i></i>
+                    <i class="fa-solid fa-gun"><i>&nbsp;
+                            {{ PlayerData?.playerWeapon.name }}
+                            ({{ PlayerData?.playerWeapon.type }}) </i>
+                    </i>
+
                     <br>
-                    <i class="fa-solid fa-shirt">&nbsp;暫無身體 裝備</i>
+                    <i class="fa-solid fa-shirt">&nbsp; 暫無身體裝備</i>
                 </div>
 
                 <div class="skill mb-4">
-                    <i class="fa-solid fa-bolt text-danger">&nbsp;攻擊技能&nbsp;</i> <i class="fa-solid fa-bolt text-danger"><i
-                            class="text-muted">&nbsp; {{ PlayerData?.AttackSkill.name }}</i></i>
+                    <i class="fa-solid fa-bolt text-danger">&nbsp;攻擊技能&nbsp;</i>
+                    <i class="fa-solid fa-bolt text-danger"></i>
+                    <i v-if="!PlayerData?.AttackSkill.name" class="text-muted">&nbsp; no skill </i>
+                    <i v-else class="text-muted">&nbsp; {{ PlayerData?.AttackSkill.name }}</i>
+
                     <br>
-                    <i class="fa-solid fa-shield-halved text-primary">&nbsp;防禦技能&nbsp;</i> <i
-                        class="fa-solid fa-shield-halved text-primary"><i class="text-muted fw-bold">&nbsp; {{
-                            PlayerData?.AttackSkill.name
-                        }}</i></i>
+
+
+                    <i class="fa-solid fa-shield-halved text-primary">&nbsp;防禦技能&nbsp;</i>
+                    <i class="fa-solid fa-shield-halved text-primary"></i>
+                    <i v-if="!PlayerData?.DefenseSkill.name" class="fs-6">&nbsp; no skill</i>
+                    <i v-else class="fs-6">&nbsp; {{ PlayerData?.DefenseSkill.name }}</i>
+
                     <br>
-                    <i class="fa-solid fa-hands-holding-circle text-success">&nbsp;輔助技能&nbsp;</i> <i
-                        class="fa-solid fa-hands-holding-circle text-success"><i class="text-muted">&nbsp; {{
-                            PlayerData?.AttackSkill.name
-                        }}</i></i>
+
+                    <i class="fa-solid fa-hands-holding-circle text-success">&nbsp;輔助技能&nbsp;</i>
+                    <i class="fa-solid fa-hands-holding-circle text-success"> </i>
+                    <i v-if="!PlayerData?.SupportSkill.name" class="text-muted">&nbsp; no skill</i>
+                    <i v-else class="fs-6">&nbsp; {{ PlayerData?.SupportSkill.name }}</i>
+
                 </div>
 
                 <div class="message_board text-break ">
@@ -104,12 +115,9 @@ const exit = async () => {
 
 </script>
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@500&display=swap');
-
 .container2 {
 
-    font-family: Itim, naikaifont, Microsoft JhengHei, sans-serif;
+    font-family: Itim, sans-serif;
 
     display: flex;
     z-index: 100;
@@ -243,7 +251,7 @@ const exit = async () => {
     top: -10px;
     background: #ff7575;
 
-    color: #e5e5e5;
+    color: #ffffff;
     font: 700 14px/20px Roboto;
     border-radius: 10px;
 }
@@ -274,7 +282,7 @@ const exit = async () => {
     top: -10px;
     background: #ff7575;
 
-    color: #e5e5e5;
+    color: #ffffff;
 
     border-radius: 10px;
 }
