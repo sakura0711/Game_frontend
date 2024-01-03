@@ -156,8 +156,8 @@ onMounted(getData);
 }
 
 .fixed-bottomS {
-    width: 150px;
-    height: 50px;
+    width: auto;
+    height: auto;
     border-radius: 10px;
     position: fixed;
     top: 10px;

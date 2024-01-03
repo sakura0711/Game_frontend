@@ -146,8 +146,8 @@ nextTick(getData);
 }
 
 .fixed-bottomS {
-    width: 150px;
-    height: 50px;
+    width: auto;
+    height: auto;
     border-radius: 10px;
     position: fixed;
     top: 10px;
@@ -155,6 +155,7 @@ nextTick(getData);
     right: 10px;
     /* 距離右側的距離，根據需要調整 */
 }
+
 
 .btn-add {
     max-width: 1000px;
