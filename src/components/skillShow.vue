@@ -7,21 +7,37 @@
                     <div class="header mb-3">
                         <img :src="imagePath" alt="" class="img">
                         <p v-if="!putClick" class="name m-3">{{ skill.SkillName }}</p>
-                        <input v-if="putClick" type="text" v-model="skill.SkillName">
+                        <input v-if="putClick" type="text" v-model="skill.SkillName" class="text p-1 mx-3">
+
                     </div>
 
                     <div class="damage" :class="textStyle">
-                        <i :class="iconStyle">&nbsp;{{ text }}&nbsp;</i>
-                        <i :class="iconStyle"></i>
+                        <i v-if="!putClick" :class="iconStyle">&nbsp;{{ text }}&nbsp;</i>
+                        <i v-if="!putClick" :class="iconStyle"></i>
                         <p v-if="!putClick"><strong :class="textStyle">&nbsp; {{ skill.SkillDamage }} </strong></p>
-                        <input v-if="putClick" type="number" v-model="skill.SkillDamage">
+
+                        <div v-if="putClick" class="form-floating text-danger">
+                            <input class=" form-control" placeholder="Leave a comment here" id="floatingTextarea"
+                                type="number" v-model="skill.SkillDamage">
+                            <label for="floatingTextarea"> <i :class="iconStyle">&nbsp;{{ text }}&nbsp;</i>
+                                <i :class="iconStyle"></i></label>
+                        </div>
+
+
                     </div>
 
                     <div class="description text-success">
-                        <i class="fa-solid fa-book mb-2">&nbsp;技能描述&nbsp;</i>
-                        <i class="fa-solid fa-book mb-2"></i>
+                        <i v-if="!putClick" class="fa-solid fa-book mb-2">&nbsp;技能描述&nbsp;</i>
+                        <i v-if="!putClick" class="fa-solid fa-book mb-2"></i>
                         <h6 v-if="!putClick" class="text-body text-break">{{ skill.SkillDescription }}</h6>
-                        <br><textarea v-if="putClick" type="text" v-model="skill.SkillDescription"></textarea>
+                        <br>
+
+                        <div class="form-floating" v-if="putClick">
+                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                style="height: 200px" v-model="skill.SkillDescription"></textarea>
+                            <label for="floatingTextarea2"><i class="fa-solid fa-book mb-2">&nbsp;技能描述&nbsp;</i>
+                                <i class="fa-solid fa-book mb-2"></i></label>
+                        </div>
 
                     </div>
                 </div>
@@ -30,7 +46,7 @@
 
             <button v-if="!putClick" class="btn-put" @click="putOnClick"><i
                     class="fa-solid fa-pen-to-square">&nbsp;修改技能</i></button>
-            <button v-if="putClick" class="btn-put" @click="submitPutData"><i
+            <button v-if="putClick" class="btn-put-finish" @click="submitPutData"><i
                     class="fa-solid fa-pen-to-square">&nbsp;完成修改</i></button>
         </div>
     </div>
@@ -191,7 +207,8 @@ const putOnClick = () => {
     }
 }
 
-.btn-put {
+.btn-put,
+.btn-put-finish {
     -webkit-user-select: none;
 
     width: 100%;
@@ -199,6 +216,21 @@ const putOnClick = () => {
     height: 40px;
     color: #fff;
     background-color: pink;
+    transition: all 1s;
+}
+
+.btn-put-finish:hover {
+    transform: scale(1.05);
+}
+
+.btn-put-finish {
+    background-color: rgb(255, 98, 124);
+    transition: all 3s;
+}
+
+.btn-put-finish:hover {
+    /* transform: scale(10.0) rotate(3600deg); */
+    transform: scale(1.05);
 }
 
 .btn-exit {
@@ -237,6 +269,14 @@ const putOnClick = () => {
     .name {
         display: inline-block;
         font: 600 20px/15px Itim, 'Microsoft YaHei';
+    }
+
+    .text {
+        border: pink 3px solid;
+        border-radius: 10px;
+        display: inline-block;
+        font: 400 20px/25px Itim, 'Kaisei Decol', serif;
+        letter-spacing: 1px;
     }
 
     .description {
