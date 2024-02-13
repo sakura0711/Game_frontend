@@ -1,7 +1,7 @@
 <template>
 	<div class="home-page">
 		<div class="home-header">
-			<h1>ㄟ黑 :D</h1>
+			<h1>資料庫期末專題 :D</h1>
 		</div>
 
 		<div class="navbar-nav">

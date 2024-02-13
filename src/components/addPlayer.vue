@@ -309,15 +309,6 @@ onMounted(() => {
     }
 }
 
-/* 
-.form-label {
-    background: #ffffff;
-    padding: 3px 5px;
-    border-radius: 10px;
-     margin-bottom: ; 
-} */
-
-
 .header {
     border: #fff 2px solid;
     border-bottom: 0;

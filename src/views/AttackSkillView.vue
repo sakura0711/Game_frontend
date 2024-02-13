@@ -41,6 +41,7 @@ import putOperator from '@/components/putOperator.vue';
 import skillShow from '@/components/skillShow.vue';
 import axios from 'axios';
 
+import swal from 'sweetalert';
 
 
 
@@ -66,7 +67,10 @@ const getData = async () => {
 
 
 const delSkill = async (item: Skills) => {
-    const confirmDelete = window.confirm('是否要刪除: ' + (item.SkillName) + '?');
+    const confirmDelete = await swal(`是否要刪除 ${item.SkillName}`, {
+        buttons: [true, "Do it!"],
+    });
+    // const confirmDelete = window.confirm('是否要刪除: ' + (item.SkillName) + '?');
     if (confirmDelete) {
         const data = {
             _skillID: item.SkillID,
@@ -77,7 +81,7 @@ const delSkill = async (item: Skills) => {
             console.log(result.data);
         } catch (error: any) {
             if (error.response.data.loadType == 'ROW_IS_REFERENCED') {
-                alert('此技能已被引用，無法刪除');
+                swal("刪除失敗", "此技能已經被 玩家 引用", "error");
             } else {
                 console.error('!!Error deleting data:', error.message);
             }

@@ -9,14 +9,14 @@
             <div class="form">
                 <button @click="exit" class="btn btn-exit"><i class="fa-solid fa-xmark"></i></button>
                 <div class="player_header d-flex mb-1">
-                    <img src="https://i.imgur.com/DziuEw7.jpeg" alt="">
+                    <img src="https://i.imgur.com/gEpFXWW.jpeg" alt="">
                     <p class="name fs-5 fw-bold">{{ PlayerData?.PlayerName }} <i class="lv fs-6">&nbsp;lv. &nbsp;{{
                         PlayerData?.playerLevel
                     }}</i></p>
                 </div>
 
                 <p class="chapter"><i class="fa-solid fa-book-bookmark">&nbsp;主線進度&nbsp;</i>
-                    <i class="fa-solid fa-book-bookmark"></i>&nbsp;&nbsp;{{ PlayerData?.MainChapter.chapter }}
+                    <i class="fa-solid fa-book-bookmark"></i>&nbsp;&nbsp;{{ PlayerData?.MainChapter.title }}
                 </p>
 
                 <div class="equipment mb-4">

@@ -19,7 +19,7 @@
                 <strong class="fs-4 name">{{ playerData.PlayerName }} <i class="lv">lv. &nbsp;{{ playerData.playerLevel
                 }}</i></strong>
 
-                <strong class="chapter"> 主線進度 : {{ playerData.MainChapter.chapter }}</strong>
+                <strong class="chapter"> 主線進度 : {{ playerData.MainChapter.title }}</strong>
 
             </div>
             <button class="delete-btn" @click="delPlayer(playerData)"></button>
